@@ -9,10 +9,10 @@ const port = 3000
 app.use(cors())
 app.use(bodyParser.json());
 
-app.use(express.static(process.cwd()+"/my-app/dist/angular-nodejs-example/"));
+app.use(express.static("../webshop-app/dist/webshop-app/"));
 
 app.get('/', (req,res) => {
-  res.sendFile(process.cwd()+"/my-app/dist/angular-nodejs-example/index.html")
+  res.sendFile("../webshop-app/dist/webshop-app/index.html")
 });
 
 app.listen(port, () => {
