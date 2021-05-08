@@ -1,1 +1,13 @@
 <p>homepage works!</p>
+<div>
+  <div class="card" *ngFor="let product of Products">
+    <img class="card-img-top" src="../../assets/note1.jpg" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{ product.name }}</h5>
+      <p class="card-text">{{ product.description }}</p>
+      <br>
+      <p class="card-text">{{ product.prize }} Ft</p>
+      <a href="#" class="btn btn-primary">Megnézem</a>
+    </div>
+  </div>
+</div>
