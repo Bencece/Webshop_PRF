@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const Product = new Schema({
     name: {
@@ -13,7 +14,11 @@ const Product = new Schema({
     image: {
         type: String,
         default: "../assets/note1.jpg"
+    },
+    quantity: {
+        type: Number,
+        default: 1
     }
 });
 
-module.exports = Product = mongoose.model("products", Product)
+module.exports = Product
