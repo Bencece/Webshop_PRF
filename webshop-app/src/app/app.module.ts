@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms'; 
+import { ReactiveFormsModule } from '@angular/forms'; 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,14 +24,9 @@ import { LoginComponent } from './login/login.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot([
-      {path: 'homepage', component: HomepageComponent},
-      {path: 'products', component: ProductsComponent},
-      {path: 'cart', component: CartComponent},
-      {path: 'login', component: LoginComponent},
-      {path: '', redirectTo: '/homepage', pathMatch: 'full'},
-      {path: '**', component: PageNotFoundComponent}
-    ]),
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

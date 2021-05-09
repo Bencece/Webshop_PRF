@@ -80,11 +80,10 @@ passport.deserializeUser(function (id, done) {
   });
 });
 
-app.post('/login',
+app.post('/logmein',
   passport.authenticate('local', {
     successRedirect: '/',
-    failureRedirect: '/login',
-    failureFlash: true
+    failureRedirect: '/login'
   })
 );
 
