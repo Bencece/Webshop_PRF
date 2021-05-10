@@ -80,12 +80,17 @@ passport.deserializeUser(function (id, done) {
   });
 });
 
-app.post('/logmein',
+app.post('/login',
   passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/'
   })
 );
+
+app.post('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
 
 app.listen(port, () => {
   console.log(`Yeah, a szerver fut! http://localhost:${port}`)
