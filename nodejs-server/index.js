@@ -42,13 +42,27 @@ app.get('/', (req, res) => {
   res.sendFile("../webshop-app/dist/webshop-app/index.html")
 });
 
+/*User.findOne({
+  name: "szaboz"
+}, (err, user) => {
+  console.log(user)
+  console.log(err)
+})*/
+
 
 
 var passport = require('passport'),
   LocalStrategy = require('passport-local').Strategy;
 
-passport.use(new LocalStrategy(
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new LocalStrategy({
+    usernameField: 'name',
+    passwordField: 'password'
+  },
   function (name, password, done) {
+    console.log("asd " + name + " " + password)
     User.findOne({
       name: name
     }, function (err, user) {
@@ -57,21 +71,21 @@ passport.use(new LocalStrategy(
       }
       if (!user) {
         return done(null, false, {
-          message: 'Incorrect username.'
+          message: 'Hibás felhasználónév!'
         });
       }
-      if (!user.validPassword(password)) {
-        return done(null, false, {
-          message: 'Incorrect password.'
-        });
-      }
-      return done(null, user);
+      user.comparePasswords(password, function (error, isMatch) {
+        if (error) return done(error, false);
+        if (!isMatch) return done('Hibas jelszó!', false);
+        return done(null, user);
+      })
     });
   }
 ));
 
 passport.serializeUser(function (user, done) {
-  done(null, user.id);
+  console.log("dsa " + user)
+  done(null, user);
 });
 
 passport.deserializeUser(function (id, done) {
@@ -80,17 +94,34 @@ passport.deserializeUser(function (id, done) {
   });
 });
 
-app.post('/login',
-  passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/'
-  })
-);
 
-app.post('/logout', function(req, res){
-  req.logout();
-  res.redirect('/');
+/*, (req, res)=>{
+  res.send("Sikeres bejelentkezés!")
+}*/
+app.post('/login', (req, res, next) => {
+  if (req.body.name) {
+    console.log(req.body)
+    passport.authenticate('local', function (error, user) {
+      console.log("qwe " + user)
+      if (error) return res.status(500).send(error);
+      req.login(user, function (error) {
+        if (error) return res.status(500).send(error);
+        return res.status(200).send('Bejelentkezes sikeres');
+      })
+    })(req, res);
+  } else {
+    return res.status(400).send('Hibas keres, username es password kell');
+  }
 });
+
+app.post('/logout', (req, res, next) => {
+  if (req.isAuthenticated()) {
+    req.logout();
+    return res.status(200).send('Kijelentkezes sikeres');
+  } else {
+    return res.status(403).send('Nem is volt bejelentkezve');
+  }
+})
 
 app.listen(port, () => {
   console.log(`Yeah, a szerver fut! http://localhost:${port}`)
