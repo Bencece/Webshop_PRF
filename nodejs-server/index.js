@@ -6,7 +6,7 @@ const userSchema = require("./models/User");
 const productSchema = require("./models/Product");
 
 var cors = require('cors')
-
+var session = require('express-session')
 var url = "mongodb://localhost:27017/webshop";
 
 mongoose
@@ -38,10 +38,6 @@ app.use(bodyParser.json());
 
 app.use(express.static("../webshop-app/dist/webshop-app/"));
 
-app.get('/', (req, res) => {
-  res.sendFile("../webshop-app/dist/webshop-app/index.html")
-});
-
 /*User.findOne({
   name: "szaboz"
 }, (err, user) => {
@@ -49,7 +45,11 @@ app.get('/', (req, res) => {
   console.log(err)
 })*/
 
-
+app.use(session({
+  secret: 'titkos kulcs',
+  resave: false,
+  saveUninitialized: true
+}))
 
 var passport = require('passport'),
   LocalStrategy = require('passport-local').Strategy;
@@ -62,7 +62,6 @@ passport.use(new LocalStrategy({
     passwordField: 'password'
   },
   function (name, password, done) {
-    console.log("asd " + name + " " + password)
     User.findOne({
       name: name
     }, function (err, user) {
@@ -84,7 +83,6 @@ passport.use(new LocalStrategy({
 ));
 
 passport.serializeUser(function (user, done) {
-  console.log("dsa " + user)
   done(null, user);
 });
 
@@ -94,15 +92,16 @@ passport.deserializeUser(function (id, done) {
   });
 });
 
+app.get('/', (req, res) => {
+  res.sendFile("../webshop-app/dist/webshop-app/index.html")
+});
 
 /*, (req, res)=>{
   res.send("Sikeres bejelentkezés!")
 }*/
 app.post('/login', (req, res, next) => {
   if (req.body.name) {
-    console.log(req.body)
     passport.authenticate('local', function (error, user) {
-      console.log("qwe " + user)
       if (error) return res.status(500).send(error);
       req.login(user, function (error) {
         if (error) return res.status(500).send(error);
