@@ -24,12 +24,16 @@ mongoose
 const User = mongoose.model('User', userSchema);
 const Product = mongoose.model('Product', productSchema);
 
-/*const teszt = new User({ name: "szaboz", password: "PRF2021"})
-console.log(teszt)
-teszt.save();
+if(!User.findOne({ name: "szaboz"})){
+  const teszt = new User({ name: "szaboz", password: "PRF2021"})
+  console.log(teszt)
+  teszt.save();
+}
 
-const teszt = new Product({ name: "Laptop", description: "asd", prize: "1234"})
-teszt.save();*/
+/*
+const teszt = new Product({ name: "Samsung laptop", description: "Fehér színű", prize: "145000", image: "../assets/note2.jpg"})
+teszt.save();
+*/
 
 const port = 3000
 
@@ -121,6 +125,19 @@ app.post('/logout', (req, res, next) => {
     return res.status(403).send('Nem is volt bejelentkezve');
   }
 })
+
+/*
+name: result.name,
+      description: result.description,
+      prize: result.prize,
+      quantity: result.quantity
+*/
+app.post('/products', (req, res) => {
+  Product.find((err, result)=>{
+    res.send(result)
+  })  
+})
+
 
 app.listen(port, () => {
   console.log(`Yeah, a szerver fut! http://localhost:${port}`)

@@ -1,7 +1,7 @@
 <p>homepage works!</p>
 <div>
-  <div class="card" *ngFor="let product of Products">
-    <img class="card-img-top" src="../../assets/note1.jpg" alt="Card image cap">
+  <div class="card" *ngFor="let product of products">
+    <img class="card-img-top" [src]="product.image" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title">{{ product.name }}</h5>
       <p class="card-text">{{ product.description }}</p>

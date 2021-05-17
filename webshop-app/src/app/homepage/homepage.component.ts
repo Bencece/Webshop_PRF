@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../product';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-homepage',
@@ -7,18 +9,15 @@ import { Product } from '../product';
   styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
-  Products : Product[] = [
-    { id: 1, name: "Acer", description: "teszt", prize: 123},
-    { id: 2, name: "Acer", description: "teszt2", prize: 1243},
-    { id: 2, name: "Acer", description: "teszt2", prize: 1243},
-    { id: 2, name: "Acer", description: "teszt2", prize: 1243},
-    { id: 2, name: "Acer", description: "teszt2", prize: 1243},
-    { id: 2, name: "Acer", description: "teszt2", prize: 1243},
-    { id: 2, name: "Acer", description: "teszt2", prize: 1243}
-  ]
-  constructor() { }
+  
+  products : Product[] = []
+
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
+    this.http.post<Product[]>(environment.serverUrl + '/products', {responseType: 'text', withCredentials: true}).subscribe(data =>{
+      this.products = data
+    })
   }
 
   

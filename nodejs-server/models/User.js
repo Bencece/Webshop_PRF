@@ -40,9 +40,7 @@ User.pre('save', function(next) {
 });
 
 User.methods.comparePasswords = function(password, next) {
-    console.log(password+" == "+this.password)
     bcrypt.compare(password, this.password, function(err, isMatch) {
-        console.log("------ "+isMatch)
         next(err, isMatch);
     });
 };
