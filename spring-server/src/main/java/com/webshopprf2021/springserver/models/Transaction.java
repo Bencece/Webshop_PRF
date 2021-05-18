@@ -13,16 +13,14 @@ public class Transaction {
     private int itemid;
     private String date;
     private int prize;
-    private String name;
 
     public Transaction(){}
 
-    public Transaction(int id, int itemid, String date, int prize, String name){
+    public Transaction(int id, int itemid, String date, int prize){
         this.id = id;
         this.itemid = itemid;
         this.date = date;
         this.prize = prize;
-        this.name = name;
     }
 
     public int getId() {
@@ -57,11 +55,4 @@ public class Transaction {
         this.prize = prize;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

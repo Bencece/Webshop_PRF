@@ -13,18 +13,15 @@ import org.springframework.web.bind.annotation.*;
 public class TransactionController {
 
     TransactionService transactionService;
-    ProductService productService;
 
     @Autowired
-    public TransactionController(TransactionService transactionService, ProductService productService){
+    public TransactionController(TransactionService transactionService){
         this.transactionService = transactionService;
-        this.productService = productService;
     }
 
     @PostMapping(path="/addTransaction", consumes = "application/json")
     public String addTransaction(@RequestBody Transaction transaction) {
         try {
-            this.productService.addProduct(new Product(transaction.getItemid(), transaction.getName(), transaction.getPrize()));
             this.transactionService.addTransaction(transaction);
             return "Tranzakció sikeresen hozzáadva.";
         } catch (Exception e) {
