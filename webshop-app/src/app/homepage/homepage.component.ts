@@ -16,7 +16,7 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.post<Product[]>(environment.serverUrl + '/products', {responseType: 'text', withCredentials: true}).subscribe(data =>{
-      this.products = data
+      this.products = data.slice(0,3)
     })
   }
 

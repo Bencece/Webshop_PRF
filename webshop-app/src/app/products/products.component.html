@@ -1,1 +1,20 @@
-<p>products works!</p>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Cikkszám</th>
+        <th scope="col">Termék</th>
+        <th scope="col">Leírás</th>
+        <th scope="col">Ár</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <th scope="row" [id]="product.itemid">{{ product.itemid }}</th>
+        <td>{{ product.name }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.prize }}</td>
+        <td><img [src]="product.image" alt="image"></td>
+        <td><a href="#" class="btn btn-primary" (click)="addToCart()">Kosárba</a></td>
+      </tr>
+    </tbody>
+  </table>
