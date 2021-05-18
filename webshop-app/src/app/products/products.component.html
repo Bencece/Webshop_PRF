@@ -14,7 +14,7 @@
         <td>{{ product.description }}</td>
         <td>{{ product.prize }}</td>
         <td><img [src]="product.image" alt="image"></td>
-        <td><a href="#" class="btn btn-primary" (click)="addToCart()">Kosárba</a></td>
+        <td><a class="btn btn-primary" (click)="addToCart(product)">Kosárba</a></td>
       </tr>
     </tbody>
   </table>

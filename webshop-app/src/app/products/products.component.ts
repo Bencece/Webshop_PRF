@@ -20,8 +20,17 @@ export class ProductsComponent implements OnInit {
     })
   }
 
-  addToCart(){
-    
+  addToCart(product : Product){
+    let tmp = localStorage.getItem("cart");
+    if(tmp){
+      var cart = JSON.parse(tmp);
+      cart.push(product)
+      localStorage.setItem("cart", JSON.stringify(cart));
+    } else {
+      let cart = [];
+      cart.push(product)
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
   }
 
 }
