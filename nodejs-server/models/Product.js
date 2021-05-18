@@ -15,12 +15,12 @@ const Product = new Schema({
         type: String,
         default: "../assets/note1.jpg"
     },
+    itemid: {
+        type: Number
+    },
     quantity: {
         type: Number,
         default: 1
-    },
-    itemid: {
-        type: Number
     }
 });
 

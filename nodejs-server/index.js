@@ -37,8 +37,10 @@ if (!User.findOne({
 }
 
 /*
-const teszt = new Product({ name: "Samsung laptop", description: "Fehér színű", prize: "145000", image: "../assets/note2.jpg"})
+const teszt = new Product({ name: "Acer laptop", description: "Fekete színű", prize: "120000", image: "../assets/note1.jpg", itemid: "1001"})
 teszt.save();
+const teszt2 = new Product({ name: "Samsung laptop", description: "Fehér színű", prize: "145000", image: "../assets/note2.jpg", itemid: "1002"})
+teszt2.save();
 */
 
 const port = 3000
@@ -171,7 +173,7 @@ app.post('/checkout', (req, res) => {
         }
       })
     });
-    res.send(200)
+    res.sendStatus(200)
   }
 })
 
