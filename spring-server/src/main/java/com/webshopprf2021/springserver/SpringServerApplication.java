@@ -16,7 +16,7 @@ public class SpringServerApplication {
 
 	@GetMapping("/")
 	public String hello(@RequestParam(value = "name", defaultValue = "a szerveren") String name) {
-		return String.format("Üdv %s!", name);
+		return String.format("Üdv %s! <br><a href='/listTransaction'>Tranzakciók listázása</a><br><a href='/listProducts'>Termékek listázása</a>", name);
 	}
 
 }
