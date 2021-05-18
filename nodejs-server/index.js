@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const userSchema = require("./models/User");
 const productSchema = require("./models/Product");
+var http = require('http');
 
 var cors = require('cors')
 var session = require('express-session')
@@ -24,8 +25,13 @@ mongoose
 const User = mongoose.model('User', userSchema);
 const Product = mongoose.model('Product', productSchema);
 
-if(!User.findOne({ name: "szaboz"})){
-  const teszt = new User({ name: "szaboz", password: "PRF2021"})
+if (!User.findOne({
+    name: "szaboz"
+  })) {
+  const teszt = new User({
+    name: "szaboz",
+    password: "PRF2021"
+  })
   console.log(teszt)
   teszt.save();
 }
@@ -133,11 +139,64 @@ name: result.name,
       quantity: result.quantity
 */
 app.post('/products', (req, res) => {
-  Product.find((err, result)=>{
+  Product.find({
+    "quantity": {
+      $gt: 0
+    }
+  }, (err, result) => {
     res.send(result)
-  })  
+  })
 })
 
+app.post('/checkout', (req, res) => {
+  if (req.body.products) {
+    var products = req.body.products;
+    products.forEach(product => {
+      sendDataToSpringServer("/addTransaction",{
+        itemid: product.itemid,
+        date: Date.now(),
+        prize: product.prize
+      })
+      sendDataToSpringServer("/addProduct",{
+        itemid: product.itemid,
+        name: product.name,
+        prize: product.prize
+      })
+      Product.updateOne({ "itemid" : product.itemid }, { $inc: {quantity: -1}}, (err, msg) => {
+        if(err){
+          console.log(err)
+          res.status(500).send("Hiba a terméknél")
+        } else {
+          console.log(msg)
+        }
+      })
+    });
+    res.send(200)
+  }
+})
+
+function sendDataToSpringServer(url, data){
+  var tr = JSON.stringify(data)
+  var options = {
+    host: 'localhost',
+    port: 8080,
+    path: url,
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Content-Length': tr.length
+    }
+  };
+
+  var req = http.request(options, function (res) {
+    res.setEncoding('utf8');
+    res.on('data', function (chunk) {
+      console.log("Szerver válasz: " + chunk);
+    });
+  });
+  req.write(tr);
+  req.end();
+}
 
 app.listen(port, () => {
   console.log(`Yeah, a szerver fut! http://localhost:${port}`)

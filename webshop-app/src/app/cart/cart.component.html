@@ -1,0 +1,23 @@
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Cikkszám</th>
+        <th scope="col">Termék</th>
+        <th scope="col">Leírás</th>
+        <th scope="col">Ár</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <th scope="row" [id]="product.itemid">{{ product.itemid }}</th>
+        <td>{{ product.name }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.prize }}</td>
+        <td><img [src]="product.image" alt="image"></td>
+      </tr>
+      <tr id="prize">
+          <td colspan="4">Összesen: <strong>{{ sum }} Ft</strong></td>
+          <td><a class="btn btn-primary" (click)="checkout()">Megrendelem</a></td>
+      </tr>
+    </tbody>
+  </table>
