@@ -45,4 +45,9 @@ public class Product {
     public void setPrize(int prize) {
         this.prize = prize;
     }
+
+    @Override
+    public String toString(){
+        return "[itemid: "+itemid+", name: "+name+", prize: "+prize+"]";
+    }
 }

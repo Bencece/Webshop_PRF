@@ -4,7 +4,7 @@ import com.webshopprf2021.springserver.models.Product;
 import com.webshopprf2021.springserver.models.ProductRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class ProductService {
@@ -19,5 +19,9 @@ public class ProductService {
         if(!this.productRepository.existsById(product.getItemid())){
             this.productRepository.save(product);
         }
+    }
+
+    public List<Product> listProducts(){
+        return this.productRepository.findAll();
     }
 }

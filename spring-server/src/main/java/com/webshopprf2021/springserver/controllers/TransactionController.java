@@ -30,4 +30,9 @@ public class TransactionController {
         }
     }
 
+    @GetMapping("/listTransaction")
+    public String listTransaction() {
+        return String.format(transactionService.listTransaction().toString());
+    }
+
 }

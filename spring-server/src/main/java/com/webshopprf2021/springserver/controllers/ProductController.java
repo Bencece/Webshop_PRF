@@ -27,4 +27,9 @@ public class ProductController {
         }
     }
 
+    @GetMapping("/listProducts")
+    public String listProducts() {
+        return String.format(productService.listProducts().toString());
+    }
+
 }

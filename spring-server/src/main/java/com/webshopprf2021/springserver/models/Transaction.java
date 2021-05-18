@@ -55,4 +55,8 @@ public class Transaction {
         this.prize = prize;
     }
 
+    @Override
+    public String toString(){
+        return "[id: "+id+", itemid: "+itemid+", date: "+date+", prize: "+prize+"]";
+    }
 }
