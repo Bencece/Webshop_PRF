@@ -52,7 +52,7 @@ const port = process.env.PORT
 app.use(cors())
 app.use(bodyParser.json());
 
-app.use(express.static("../webshop-app/dist/webshop-app/", { root: __dirname }));
+app.use(express.static("dist/webshop-app/", { root: __dirname }));
 
 /*User.findOne({
   name: "szaboz"
@@ -109,7 +109,7 @@ passport.deserializeUser(function (id, done) {
 });
 
 app.get('/', (req, res) => {
-  res.sendFile("../webshop-app/dist/webshop-app/index.html", { root: __dirname })
+  res.sendFile("dist/webshop-app/index.html", { root: __dirname })
 });
 
 /*, (req, res)=>{
