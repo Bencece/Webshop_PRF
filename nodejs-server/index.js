@@ -47,7 +47,7 @@ const teszt2 = new Product({ name: "Samsung laptop", description: "Fehér szín�
 teszt2.save();
 */
 
-const port = process.env.NODEJS_SERVER_PORT
+const port = process.env.PORT
 
 app.use(cors())
 app.use(bodyParser.json());
