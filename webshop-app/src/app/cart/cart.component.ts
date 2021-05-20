@@ -30,6 +30,7 @@ export class CartComponent implements OnInit {
 
   checkout(){
     this.http.post(environment.serverUrl + '/checkout', {responseType: 'text', withCredentials: true, products : this.products }).subscribe(msg =>{
+      alert("Sikeres rendelés!")
       console.log(msg)
       localStorage.removeItem("cart")
       this.products = []

@@ -21,6 +21,7 @@ export class ProductsComponent implements OnInit {
   }
 
   addToCart(product : Product){
+    alert(product.name+" sikeresen a kosárhoz adva!");
     let tmp = localStorage.getItem("cart");
     if(tmp){
       var cart = JSON.parse(tmp);

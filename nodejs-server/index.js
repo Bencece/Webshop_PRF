@@ -6,9 +6,11 @@ const userSchema = require("./models/User");
 const productSchema = require("./models/Product");
 var http = require('http');
 
+require('dotenv').config()
+
 var cors = require('cors')
 var session = require('express-session')
-var url = "mongodb://localhost:27017/webshop";
+var url = process.env.MONGO_SERVER_URL
 
 mongoose
   .connect(url, {
@@ -170,18 +172,18 @@ app.post('/checkout', (req, res) => {
           res.status(500).send("Hiba a terméknél")
         } else {
           console.log(msg)
+          res.send("Sikeres")
         }
       })
     });
-    res.sendStatus(200)
   }
 })
 
 function sendDataToSpringServer(url, data){
   var tr = JSON.stringify(data)
   var options = {
-    host: 'localhost',
-    port: 8080,
+    host: process.env.SPRING_SERVER_URL,
+    port: process.env.SPRING_SERVER_PORT,
     path: url,
     method: 'POST',
     headers: {
