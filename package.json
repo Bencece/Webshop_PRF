@@ -1,0 +1,21 @@
+{
+  "name": "webshop_prf",
+  "version": "1.0.0",
+  "description": "Programrendszerek fejlesztése gyakorlatra készült webáruház 🛒",
+  "main": "./nodejs-server/index.js",
+  "scripts": {
+    "heroku-postbuild": "cd ../webshop-app && ng build",
+    "start": "node ./nodejs-server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bencece/Webshop_PRF.git"
+  },
+  "author": "Bencece",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bencece/Webshop_PRF/issues"
+  },
+  "homepage": "https://github.com/Bencece/Webshop_PRF#readme"
+}
