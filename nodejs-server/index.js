@@ -27,6 +27,7 @@ mongoose
 const User = mongoose.model('User', userSchema);
 const Product = mongoose.model('Product', productSchema);
 
+/*
 if (!User.findOne({
     name: "szaboz"
   })) {
@@ -37,6 +38,7 @@ if (!User.findOne({
   console.log(teszt)
   teszt.save();
 }
+*/
 
 /*
 const teszt = new Product({ name: "Acer laptop", description: "Fekete színű", prize: "120000", image: "../assets/note1.jpg", itemid: "1001"})
