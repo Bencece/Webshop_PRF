@@ -47,7 +47,7 @@ const teszt2 = new Product({ name: "Samsung laptop", description: "Fehér szín�
 teszt2.save();
 */
 
-const port = 3000
+const port = process.env.NODEJS_SERVER_PORT
 
 app.use(cors())
 app.use(bodyParser.json());
@@ -205,5 +205,5 @@ function sendDataToSpringServer(url, data){
 }
 
 app.listen(port, () => {
-  console.log(`Yeah, a szerver fut! http://localhost:${port}`)
+  console.log(`Yeah, a szerver fut! A port: ${port}`)
 })
