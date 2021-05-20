@@ -4,7 +4,7 @@
   "description": "Programrendszerek fejlesztése gyakorlatra készült webáruház 🛒",
   "main": "./nodejs-server/index.js",
   "scripts": {
-    "heroku-postbuild": "cd webshop-app && npm i && ng build",
+    "heroku-postbuild": "cd webshop-app && npm i",
     "start": "node nodejs-server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
