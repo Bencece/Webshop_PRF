@@ -5,6 +5,8 @@
         <th scope="col">Termék</th>
         <th scope="col">Leírás</th>
         <th scope="col">Ár</th>
+        <th scope="col">Kép</th>
+        <th scope="col">Eltávolítás</th>
       </tr>
     </thead>
     <tbody>
@@ -14,10 +16,11 @@
         <td>{{ product.description }}</td>
         <td>{{ product.prize }}</td>
         <td><img [src]="product.image" alt="image"></td>
+        <td><button class="btn btn-warning" (click)="removeFromCart(product)">X</button></td>
       </tr>
       <tr id="prize">
-          <td colspan="4">Összesen: <strong>{{ sum }} Ft</strong></td>
-          <td><a class="btn btn-primary" (click)="checkout()">Megrendelem</a></td>
+          <td colspan="5">Összesen: <strong>{{ sum }} Ft</strong></td>
+          <td><button class="btn btn-primary" [attr.disabled]="canNotCheckout?'true':null" (click)="checkout()">Megrendelem</button></td>
       </tr>
     </tbody>
   </table>

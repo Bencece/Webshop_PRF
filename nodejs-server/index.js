@@ -172,12 +172,10 @@ app.post('/checkout', (req, res) => {
         if(err){
           console.log(err)
           res.status(500).send("Hiba a terméknél")
-        } else {
-          console.log(msg)
-          res.send("Sikeres")
         }
       })
     });
+    res.status(200).send("Sikeres vásárlás!")
   }
 })
 
